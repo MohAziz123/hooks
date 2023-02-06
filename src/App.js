@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
 import AddMovie from './AddMovie';
 import './App.css';
 import FilterMovie from './FilterMovie';
+import MovieDescription from './MovieDescription';
 import MovieList from './MovieListe';
 import NavMovie from './NavMovie';
 
@@ -19,12 +21,13 @@ function App() {
   const [etoile,setEtoile] = useState(0)
   return (
     <div>
-     <NavMovie></NavMovie>
+     <NavMovie/>
      <AddMovie movies={movies} setMovies={setMovies}></AddMovie>
      <FilterMovie setEtoile={setEtoile} setTitre={setTitre} etoile={etoile} titre={titre}/>
-     <MovieList movies={movies} titre={titre} etoile={etoile} setMovies={setMovies}></MovieList>
-   
-     
+   <Routes>
+      <Route path='/' element={<MovieList movies={movies} titre={titre} etoile={etoile} setMovies={setMovies}></MovieList>} />
+      <Route path='/MovieDescription/:id' element={<MovieDescription movies={movies}/>} />
+   </Routes>
     </div>
   );
 }
